@@ -5,18 +5,29 @@ import {
   Text,
   View,
   Image,
+  Dimensions,
+  Alert,
 } from 'react-native';
 
 
 class App extends React.Component {
   render() {
-    const { cardStyle } = styles;
+    const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
+    Alert.alert(`Device, width: ${width}, height: ${height}`)
+
+
+
+
+    const { cardStyle, imageStyle } = styles;
     const dummyImage = require('./puppy_01.jpg');
     return (
-      <View style={{flex:1}}>
+
         <View style={{flex:1}}>
           <View style={cardStyle}>
-            <Image source={dummyImage} style={{width: 350, height: 300}}/>
+            <Image
+              resizeMode="cover"
+              source={dummyImage} style={imageStyle}/>
             <Text>justifyContent: flex-start</Text>
             <BarWithIcons />
 
@@ -33,7 +44,7 @@ class App extends React.Component {
             <BarWithIcons style={{justifyContent: 'space-around'}}/>
           </View>
         </View>
-      </View>
+
     );
   }
 }
@@ -54,16 +65,19 @@ const BarWithIcons = (props) => {
 const styles = StyleSheet.create({
   cardStyle: {
     flex: 1,
+    //flexDirection: 'column',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'stretch',
+    //justifyContent: 'center',
     //alignSelf: 'center',
     margin: 20,
+
   },
   barStyle: {
-    flex: 1,
-    alignSelf: 'stretch',
-    maxHeight: 50,
+    //flex: 1,
+    //alignSelf: 'stretch',
+    //height: 50,
+    padding: 5,
     backgroundColor: 'gray',
     flexDirection: 'row',
     alignItems: 'center',
@@ -72,7 +86,10 @@ const styles = StyleSheet.create({
   childStyle: {
     width: 30,
     height: 30,
-    //borderWidth: 2,
+  },
+  imageStyle: {
+    //resizeMode: 'contain',
+    width: Dimensions.get('window').width - 40,
 
   },
 });
